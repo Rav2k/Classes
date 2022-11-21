@@ -8,36 +8,36 @@
 
 using namespace std;
 
-void addMethod(vector<media*>&storage);
+void addMethod(vector<media*>&storage); // method prototypes
 void searchMethod(vector<media*>&storage);
 void deleteMethod(vector<media*>&storage);
 int main(){
   char action[20];
-  vector<media*> storage;
+  vector<media*> storage; //storing the different media.
   cout<<"Select what you want to do"<<endl;
   cout<<endl;
-  do{
+  do{//keep asking what they wan tot do till they want to quit the loop.
     cout<<"add, search, or delete. Type quit to quit the program(all in lowercase)"<<endl;
     cin.getline(action, 20, '\n');
-    if(strcmp(action, "add") == 0){
+    if(strcmp(action, "add") == 0){//if the user wants to add media then run add method
       addMethod(storage);
     }
-    else if(strcmp(action, "search")==0){
+    else if(strcmp(action, "search")==0){//if the user wants to search then run search method
       searchMethod(storage);
     }
-    else if(strcmp(action, "delete")==0){
-      deleteMethod(storage);
+    else if(strcmp(action, "delete")==0){//if the user wants to delete then run delete method
+      deleteMethod(storage);//passing the vector into the method so I can add to it and remove it(for this method I am removing it)
     }
   }while(strcmp(action, "quit") != 0);
 }
-void addMethod(vector<media*>&storage){
-  music* mus = new music();
-  videogames* video = new videogames();//Videogames
-  movies* movie = new movies();//Movies
+void addMethod(vector<media*>&storage)//adds a media pointer to storage. Storage was refrence because we want to {
+  music* mus = new music(); // making a music object 
+  videogames* video = new videogames();//making a videogame object 
+  movies* movie = new movies();//making a movies object 
   char mediaType[20];
   cout<<"What media do you want to add? (put in lowercase)"<<endl;
   cin.get(mediaType, 20);
-  if(strcmp(mediaType, "music")==0){
+  if(strcmp(mediaType, "music")==0){//if the user wants to add a music type then we ask for the variables for the music media and push the information into mus(object for music)
     cout<<"Title: "<<endl;
     cin>>mus->title;
     cout<< "Artist's name: "<<endl;
@@ -52,7 +52,7 @@ void addMethod(vector<media*>&storage){
     storage.push_back(mus);
     cout<<"Music added"<<endl;
   }
-  else if(strcmp(mediaType,"videogames")==0){
+  else if(strcmp(mediaType,"videogames")==0){//if the user wants to add a videogames type then we ask for the variables for the music media and push the information into video(object for videogames)
     cout<<"Title: "<<endl;
     cin>>video->title;
     cout<< "Year: "<<endl;
@@ -65,7 +65,7 @@ void addMethod(vector<media*>&storage){
     storage.push_back(video);
     cout<<"Videogame added"<<endl;
   }
-  else if(strcmp(mediaType, "movies")==0){
+  else if(strcmp(mediaType, "movies")==0){//if the user wants to add a movie type then we ask for the variables for the movie media and push the information into mus(object for movies)
     cout<<"Title: "<<endl;
     cin>>movie->title;
     cout<< "Director: "<<endl;
@@ -82,31 +82,31 @@ void addMethod(vector<media*>&storage){
   }
 }
 void searchMethod(vector<media*>&storage){
-   vector<media*>::iterator ptr;
+   vector<media*>::iterator ptr;// for going through the storage and finding what the user is looking for.
    char searchType[20];
    cout<<"Do you want to search by title or year? "<<endl;
    cin>>searchType;
    cin.ignore();
    char typeMedia[20];
-   if(strcmp(searchType, "title") == 0){
+   if(strcmp(searchType, "title") == 0){//if the user wants to search by title 
      char userTitle[20];
      cout<<"What type of media?(all lowercase)"<<endl;
      cin.getline(typeMedia, 20);
      if(strcmp(typeMedia, "music") ==0){
       cout<<"Title: "<<endl;
       cin.getline(userTitle, 20);
-      for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+      for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same title.
          if(strcmp((*ptr)->title, userTitle) == 0){
-	   (*ptr)->printStuff();
+	   (*ptr)->printStuff();//print all the information in the music cpp file about it
           }
          }
      }
      else if(strcmp(typeMedia, "videogames") == 0){
       cout<<"Title: "<<endl;
       cin.getline(userTitle, 20);
-      for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+      for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same title.
          if(strcmp((*ptr)->title, userTitle) == 0){
-	   (*ptr)->printStuff();
+	   (*ptr)->printStuff();//print all the information in the vidoegames cpp file about it
             }
           }
      }
@@ -115,9 +115,9 @@ void searchMethod(vector<media*>&storage){
       cout<<"Title: "<<endl;
       cin.getline(userTitle, 20);
       
-      for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+      for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same title.
          if(strcmp((*ptr)->title, userTitle) == 0){
-	   (*ptr)->printStuff();
+	   (*ptr)->printStuff();//print all the information in the movies cpp file about it.
             }
           }
 
@@ -131,9 +131,9 @@ void searchMethod(vector<media*>&storage){
        if(strcmp(typeMedia2, "music")==0){//if music
 	 cout<<"Year: "<<endl;
 	 cin>>userYear;
-	 for (ptr = storage.begin(); ptr != storage.end(); ptr++){	   
+	 for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same year.	   
 	   if((*ptr)->year==userYear){
-	     (*ptr)->printStuff();
+	     (*ptr)->printStuff();//print all the information in the music cpp file about it
 	   }
           }
      }
@@ -142,9 +142,9 @@ void searchMethod(vector<media*>&storage){
 	 cout<<"Year: "<<endl;
          cin>>userYear;
 	 cin.ignore();
-         for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+         for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same year.
            if((*ptr)->year==userYear){
-             (*ptr)->printStuff();
+             (*ptr)->printStuff();//print all the information in the videogames cpp file about it
             }
           }
        }
@@ -152,9 +152,9 @@ void searchMethod(vector<media*>&storage){
 	 cout<<"Year: "<<endl;
          cin>>userYear;
          cin.ignore();
-         for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+         for (ptr = storage.begin(); ptr != storage.end(); ptr++){//go through the storage and look for anything with the same year.
            if((*ptr)->year==userYear){
-             (*ptr)->printStuff();
+             (*ptr)->printStuff();//print all the information in the movies cpp file about it
             }
           }
        }
@@ -190,7 +190,7 @@ void deleteMethod(vector<media*>&storage){
        cin>>userTitle2;
        cin.ignore();//will it ignore for loop and if?
        for (ptr = storage.begin(); ptr != storage.end(); ptr++){
-         if(strcmp((*ptr)->title, userTitle2) == 0){
+         if(strcmp((*ptr)->title, userTitle2) == 0){ //searches for the title using a pointer to the storage and then deleting it.
            delete *ptr;
            cout<<"Videogame has been successfully deleted"<<endl;
            storage.erase(ptr);
@@ -204,7 +204,7 @@ void deleteMethod(vector<media*>&storage){
        cin>>userTitle2;
        cin.ignore();//will it ignore for loop and if?
        for (ptr = storage.begin(); ptr != storage.end(); ptr++){
-         if(strcmp((*ptr)->title, userTitle2) == 0){
+         if(strcmp((*ptr)->title, userTitle2) == 0){//searches for the title using a pointer to the storage and then deleting it.
            delete *ptr;
            cout<<"Movie has been successfully deleted"<<endl;
            storage.erase(ptr);
@@ -222,7 +222,7 @@ void deleteMethod(vector<media*>&storage){
          cout<<"Year: "<<endl;
          cin>>userYear2;
          for (ptr = storage.begin(); ptr != storage.end(); ptr++){
-           if((*ptr)->year == userYear2){
+           if((*ptr)->year == userYear2){//searches for the year using a pointer to the storage and then deleting it.
              delete *ptr;
              storage.erase(ptr);
 	     cout<<"Music has been deleted"<<endl;
@@ -235,7 +235,7 @@ void deleteMethod(vector<media*>&storage){
          cin>>userYear2;
 	 cin.ignore();
          for (ptr = storage.begin(); ptr != storage.end(); ptr++){
-           if((*ptr)->year == userYear2){
+           if((*ptr)->year == userYear2){//searches for the year using a pointer to the storage and then deleting it.
              delete *ptr;
              storage.erase(ptr);
              cout<<"Videogame has been deleted"<<endl;
@@ -248,7 +248,7 @@ void deleteMethod(vector<media*>&storage){
         cout<<"Year: "<<endl;
          cin>>userYear2;
 	 cin.ignore();
-	 for (ptr = storage.begin(); ptr != storage.end(); ptr++){
+	 for (ptr = storage.begin(); ptr != storage.end(); ptr++){//searches for the year using a pointer to the storage and then deleting it.
            if((*ptr)->year == userYear2){
              delete *ptr;
              storage.erase(ptr);
